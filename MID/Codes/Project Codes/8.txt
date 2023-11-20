@@ -1,0 +1,837 @@
+Name: MD.Ratul Rayhan
+ID: 17-34810-2
+
+Features & Description:
+
+Day Mode: There will be sun, cloud, house, tree, bush.
+
+Night Mode: There will be moon, stars, house, tree, bush.
+
+Translation Animation: The river will have moving waves. There will be moving boats. The clouds will also be moving.
+
+Lights ON/OFF: The lights inside the house can be turned on/off by pressing keys.
+
+Handle Mouse: By clicking left button of the mouse, the speed of the boat will increase. By clicking right button of the mouse, the speed of the boat will decrease.
+
+Handle Keypress: Different key press will do different functionalities. They are given below:
+
+1. “a” will stop the boat
+2. “w” will start the boat at initial speed
+3. “b” will stop the cloud
+4. “c” will start the cloud at initial speed
+5. “o” will stop the waves and boat at once
+6. “g” will start the waves and boat simultaneously at their own initial speed
+7. “h” will stop the waves
+8. “i” will start the waves at initial speed
+9. “j” will stop all translation animations in the project
+10. “k” will start all translation animations at once with their own initial speed
+11. “m” will stop the waves and cloud at once
+12. “p” will start the waves and cloud simultaneously at their own initial speed
+13. “q” will increase the speed of the cloud
+14. “r” will decrease the speed of the cloud
+15. “f” will turn the light off of the house
+16. “l” will turn the lights on of the house
+17 “d” will turn on day mode
+18. “n” will turn on night mode
+
+Source Code:
+
+#include<windows.h>
+#include<cstdio>
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <math.h>
+
+GLfloat position = 0.0f;
+GLfloat position1 = 0.0f;
+GLfloat position2 = 0.0f;
+GLfloat position3 = 0.0f;
+GLfloat position4 = 0.0f;
+GLfloat position5 = 0.0f;
+GLfloat speed = 0.1f;
+GLfloat speed1 = 0.08f;
+GLfloat speed2 = 0.05f;
+
+float e=0.90,f=0.91,g=0.98;
+float h=0.0,i=0.9,j=0.9;
+int k=248,l=248,m=255;
+float n=1.0,o=0.9,p=0.0;
+float q=0.0,r=0.9,s=0.9;
+
+void circle()
+{
+    glBegin(GL_POLYGON);
+	for(int i=0;i<200;i++)
+        {
+
+            float pi=3.1416;
+            float A=(i*2*pi)/200;
+            float r=0.07;
+            float x = r * cos(A);
+            float y = r * sin(A);
+            glVertex2f(x,y );
+        }
+
+
+	glEnd();
+}
+
+void circle2()
+{
+    glBegin(GL_POLYGON);
+	for(int i=0;i<200;i++)
+        {
+
+            float pi=3.1416;
+            float A=(i*2*pi)/200;
+            float r=0.01;
+            float x = r * cos(A);
+            float y = r * sin(A);
+            glVertex2f(x,y );
+        }
+
+
+	glEnd();
+}
+
+
+void circle3()
+{
+    glBegin(GL_POLYGON);
+	for(int i=0;i<200;i++)
+        {
+
+            float pi=3.1416;
+            float A=(i*2*pi)/200;
+            float r=0.005;
+            float x = r * cos(A);
+            float y = r * sin(A);
+            glVertex2f(x,y );
+        }
+
+
+	glEnd();
+}
+
+
+void sun()
+{
+    glPushMatrix();
+    glColor3f(n,o,p);
+    glTranslatef(-0.25f, 0.8f, 0.0f);
+    circle();
+	glPopMatrix();
+
+	  glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(-0.8f, 0.8f, 0.0f);
+    circle3();
+glPopMatrix();
+
+	  glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(-0.9f, 0.9f, 0.0f);
+    circle3();
+glPopMatrix();
+
+
+	  glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(-0.9f, 0.7f, 0.0f);
+    circle3();
+glPopMatrix();
+
+ glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(-0.7f, 0.6f, 0.0f);
+    circle3();
+glPopMatrix();
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(-0.7f, 0.8f, 0.0f);
+    circle3();
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(-0.4f, 0.5f, 0.0f);
+    circle3();
+glPopMatrix();
+
+
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(-0.5f, 0.9f, 0.0f);
+    circle3();
+glPopMatrix();
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(-0.5f, 0.6f, 0.0f);
+    circle3();
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(0.0f, 0.6f, 0.0f);
+    circle3();
+glPopMatrix();
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(0.1f, 0.9f, 0.0f);
+    circle3();
+glPopMatrix();
+
+
+
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(0.2f, 0.8f, 0.0f);
+    circle3();
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(0.4f, 0.8f, 0.0f);
+    circle3();
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(0.6f, 0.9f, 0.0f);
+    circle3();
+glPopMatrix();
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(0.8f, 0.7f, 0.0f);
+    circle3();
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(q, r, s);
+	glTranslatef(0.9f, 0.8f, 0.0f);
+    circle3();
+glPopMatrix();
+
+
+}
+
+void clouds()
+{
+    glPushMatrix();
+	glTranslatef(position5, 0.0f, 0.0f);
+
+glColor3ub(k,l,m);  //cloud1
+	glTranslatef(0.5f, 0.8f, 0.0f);
+    circle();
+
+ glPopMatrix();
+
+   glPushMatrix();
+ 	glTranslatef(position5, 0.0f, 0.0f);
+
+glColor3ub(k,l,m);  //cloud2
+	glTranslatef(0.55f, 0.85f, 0.0f);
+    circle();
+
+  glPopMatrix();
+  glPushMatrix();
+ 	glTranslatef(position5, 0.0f, 0.0f);
+
+glColor3ub(k,l,m);  //cloud3
+	glTranslatef(0.6f, 0.8f, 0.0f);
+    circle();
+
+  glPopMatrix();
+
+
+}
+
+
+void tree()
+{
+
+
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.55f, 0.25f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.62f, 0.25f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.68f, 0.25f, 0.0f);
+    circle();
+
+glPopMatrix();
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.75f, 0.25f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.6f, 0.36f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.65f, 0.36f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.7f, 0.36f, 0.0f);
+    circle();
+
+glPopMatrix();
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.62f, 0.46f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.68f, 0.46f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.6,0.8,0.196078);
+	glTranslatef(-0.65f, 0.57f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+}
+void fruits()
+{
+glPushMatrix();
+glColor3f(1,0,0);
+	glTranslatef(-0.6f, 0.3f, 0.0f);
+    circle2();
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(1,0,0);
+	glTranslatef(-0.65f, 0.25f, 0.0f);
+    circle2();
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(1,0,0);
+	glTranslatef(-0.7f, 0.3f, 0.0f);
+    circle2();
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(1,0,0);
+	glTranslatef(-0.75f, 0.25f, 0.0f);
+    circle2();
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(1,0,0);
+	glTranslatef(-0.55f, 0.25f, 0.0f);
+    circle2();
+glPopMatrix();
+
+
+
+
+}
+
+
+
+void object(){
+
+glColor3ub (169, 242, 242);    //river
+	 glBegin(GL_QUADS);
+        glVertex2f(-1.0f, -1.0f);
+        glVertex2f(1.0f, -1.0f);
+        glVertex2f(1.0f, -0.1f);
+        glVertex2f(-1.0f, -0.1f);
+	glEnd();
+
+
+glMatrixMode(GL_MODELVIEW);
+
+
+
+    glPushMatrix();
+	glTranslatef(position1, 0.0f, 0.0f);
+glColor3f(0.0f, 0.0f, 1.0f); //wave1
+glBegin(GL_LINES);
+
+        glVertex2f(-0.4f, -0.2f);
+        glVertex2f(-0.1f, -0.2f);
+        glEnd();
+      glPopMatrix();
+
+glMatrixMode(GL_MODELVIEW);
+
+
+
+    glPushMatrix();
+	glTranslatef(position2, 0.0f, 0.0f);
+glColor3f(0.0f, 0.0f, 1.0f);  //wave2
+        glBegin(GL_LINES);
+
+        glVertex2f(-0.5f, -0.4f);
+        glVertex2f(-0.7f, -0.4f);
+     glEnd();
+
+glPopMatrix();
+
+glMatrixMode(GL_MODELVIEW);
+
+
+
+    glPushMatrix();
+	glTranslatef(position3, 0.0f, 0.0f);
+glColor3f(0.0f, 0.0f, 1.0f);  //wave3
+
+
+  glBegin(GL_LINES);
+
+        glVertex2f(0.6f, -0.7f);
+        glVertex2f(0.9f, -0.7f);
+        glEnd();
+
+glPopMatrix();
+
+glMatrixMode(GL_MODELVIEW);
+
+
+
+    glPushMatrix();
+	glTranslatef(position4, 0.0f, 0.0f);
+glColor3f(0.0f, 0.0f, 1.0f);  //wave4
+ glBegin(GL_LINES);
+        glVertex2f(0.8f, -0.45f);
+        glVertex2f(1.0f, -0.45f);
+        glEnd();
+
+
+
+   glPopMatrix();
+
+
+
+glMatrixMode(GL_MODELVIEW);
+
+
+
+    glPushMatrix();
+	glTranslatef(position, 0.0f, 0.0f);
+     glColor3f(1.0f, 0.0f, 0.0f);    //boat
+   glBegin(GL_TRIANGLES);
+
+    glVertex2f(0.1f, -0.2);
+	glVertex2f(0.1f, -0.6f);
+	glVertex2f(-0.0f,  -0.3f);
+
+	glEnd();
+  glColor3ub (209, 102, 27);
+      glBegin(GL_QUADS);
+        glVertex2f(0.1f, -0.7f);
+        glVertex2f(0.4f, -0.7f);
+        glVertex2f(0.5f, -0.6f);
+        glVertex2f(0.0f, -0.6);
+	glEnd();
+    glColor3ub (206, 175, 109);
+	 glBegin(GL_QUADS);
+        glVertex2f(0.1f, -0.6f);
+        glVertex2f(0.4f, -0.6f);
+        glVertex2f(0.4f, -0.5f);
+        glVertex2f(0.1f, -0.5f);
+	glEnd();
+    glPopMatrix();
+
+
+glColor3f(h,i,j);  //sky
+	 glBegin(GL_QUADS);
+        glVertex2f(-1.0f, 0.4f);
+        glVertex2f(1.0f, 0.4f);
+        glVertex2f(1.0f, 1.0f);
+        glVertex2f(-1.0f, 1.0);
+	glEnd();
+
+
+
+
+
+
+
+glColor3f(0.0f, 0.3f, 0.0f);    //field
+	 glBegin(GL_QUADS);
+        glVertex2f(-1.0f, -0.1f);
+        glVertex2f(1.0f, -0.1f);
+        glVertex2f(1.0f, 0.4f);
+        glVertex2f(-1.0f, 0.4f);
+	glEnd();
+
+
+glMatrixMode(GL_MODELVIEW);
+
+
+glPushMatrix();
+
+glColor3f(0.0f, 0.3f, 0.0f); //bush
+	glTranslatef(0.9f, 0.42f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+glPushMatrix();
+
+glColor3f(0.0f, 0.3f, 0.0f);
+	glTranslatef(0.8f, 0.42f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+glPushMatrix();
+
+glColor3f(0.0f, 0.3f, 0.0f);
+	glTranslatef(0.85f, 0.46f, 0.0f);
+    circle();
+
+glPopMatrix();
+
+
+
+
+
+glColor3f(0.75, 0.47, 0.14);   //home
+	 glBegin(GL_QUADS);
+        glVertex2f(0.1f, 0.0f);
+        glVertex2f(0.6f, 0.0f);
+        glVertex2f(0.6f, 0.5f);
+        glVertex2f(0.1f, 0.5);
+	glEnd();
+
+
+
+	glColor3f(e,f,g);  //door
+	 glBegin(GL_QUADS);
+        glVertex2f(0.3f, 0.0f);
+        glVertex2f(0.4f, 0.0f);
+        glVertex2f(0.4f, 0.3f);
+        glVertex2f(0.3f, 0.3);
+	glEnd();
+
+glColor3f(0.35,0.0,0.0);   //window1
+	 glBegin(GL_QUADS);
+        glVertex2f(0.15f, 0.2f);
+        glVertex2f(0.25f, 0.2f);
+        glVertex2f(0.25f, 0.35f);
+        glVertex2f(0.15f, 0.35f);
+	glEnd();
+
+
+
+glColor3f(0.35,0.0,0.0);   //window2
+	 glBegin(GL_QUADS);
+        glVertex2f(0.45f, 0.2f);
+        glVertex2f(0.55f, 0.2f);
+        glVertex2f(0.55f, 0.35f);
+        glVertex2f(0.45f, 0.35f);
+	glEnd();
+
+
+glColor3f(0.35,0.0,0.0);   //roof
+	 glBegin(GL_QUADS);
+        glVertex2f(0.0f, 0.5f);
+        glVertex2f(0.7f, 0.5f);
+        glVertex2f(0.6f, 0.7f);
+        glVertex2f(0.1f, 0.7);
+	glEnd();
+
+
+glColor3f(0.9,0.2,0.0);
+	 glBegin(GL_QUADS);
+        glVertex2f(-0.7f, 0.0f);
+        glVertex2f(-0.6f, 0.0f);
+        glVertex2f(-0.6f, 0.2f);
+        glVertex2f(-0.7f, 0.2f);
+	glEnd();
+
+
+
+
+
+}
+
+void update(int value) {
+
+    if(position <-1.5)
+        position = 1.0f;
+
+    position -= speed;
+
+	glutPostRedisplay();
+
+
+	glutTimerFunc(100, update, 0);
+}
+
+void update1(int value) {
+
+    if(position1 <-1.0)
+        position1 = 1.0f;
+
+    position1 -= speed1;
+
+	glutPostRedisplay();
+
+
+	glutTimerFunc(100, update1, 0);
+}
+
+void update2(int value) {
+
+    if(position2 <-1.0)
+        position2 = 1.0f;
+
+    position2 -= speed1;
+
+	glutPostRedisplay();
+
+
+	glutTimerFunc(100, update2, 0);
+}
+void update3(int value) {
+
+    if(position3 <-1.0)
+        position3 = 1.0f;
+
+    position3 -= speed1;
+
+	glutPostRedisplay();
+
+
+	glutTimerFunc(100, update3, 0);
+}
+
+
+void update4(int value) {
+
+    if(position4 <-1.0)
+        position4 = 1.0f;
+
+    position4 -= speed1;
+
+	glutPostRedisplay();
+
+
+	glutTimerFunc(100, update4, 0);
+}
+
+
+
+void update5(int value) {
+
+    if(position5 <-1.5)
+        position5 = 1.0f;
+
+    position5 -= speed2;
+
+	glutPostRedisplay();
+
+
+	glutTimerFunc(100, update5, 0);
+}
+
+
+
+
+
+void display() {
+
+
+glClear(GL_COLOR_BUFFER_BIT);
+glLoadIdentity();
+object();
+sun();
+clouds();
+tree();
+fruits();
+
+glFlush();
+
+
+}
+
+
+
+void handleMouse(int button, int state, int x, int y) {
+	if (button == GLUT_LEFT_BUTTON)
+	{	speed += 0.1f;
+			}
+if (button == GLUT_RIGHT_BUTTON)
+	{speed -= 0.1f;   }
+glutPostRedisplay();}
+
+
+
+void handleKeypress(unsigned char key, int x, int y) {
+
+	switch (key) {
+
+
+case 'a':
+    speed = 0.0f;
+    break;
+case 'w':
+    speed = 0.1f;
+    break;
+
+    case 'b':
+    speed2 = 0.0f;
+    break;
+case 'c':
+    speed2 = 0.05f;
+    break;
+
+ case 'o':
+    speed1 = 0.0f;
+    speed = 0.0f;
+    break;
+case 'g':
+    speed1 = 0.08f;
+    speed = 0.1f;
+    break;
+
+case 'h':
+    speed1 = 0.0f;
+
+    break;
+case 'i':
+    speed1 = 0.08f;
+
+    break;
+
+    case 'j':
+    speed1 = 0.0f;
+    speed = 0.0f;
+    speed2 = 0.0f;
+    break;
+case 'k':
+    speed1 = 0.08f;
+    speed = 0.1f;
+    speed2 = 0.05f;
+    break;
+    case 'm':
+    speed1 = 0.0f;
+
+    speed2 = 0.0f;
+    break;
+case 'p':
+    speed1 = 0.08f;
+
+    speed2 = 0.05f;
+    break;
+
+case 'q':
+speed2 += 0.1f;
+break;
+
+case 'r':
+speed2 -= 0.1f;
+break;
+
+
+
+
+glutPostRedisplay();
+case 'l':
+
+		e=0.90;
+		f=0.91;
+		g=0.98;
+		break;
+glutPostRedisplay();
+	case 'f':
+
+		e=0.0;
+		f=0.0;
+		g=0.0;
+		break;
+glutPostRedisplay();
+
+glutPostRedisplay();
+case 'd':
+
+		h=0.0;
+		i=0.9;
+		j=0.9;
+		k=248;
+		l=248;
+		m=255;
+		n=1.0;
+		o=0.9;
+		p=0.0;
+		q=0.0;
+		r=0.9;
+		s=0.9;
+		break;
+glutPostRedisplay();
+	case 'n':
+
+		h=0.0;
+		i=0.0;
+		j=0.0;
+		k=112;
+		l=123;
+		m=124;
+		n=0.9;
+		o=0.9;
+		p=0.9;
+		q=0.9;
+		r=0.9;
+		s=0.9;
+
+		break;
+glutPostRedisplay();
+
+
+	}
+}
+
+int main(int argc, char** argv) {
+   glutInit(&argc, argv);
+   glutInitWindowSize(1920, 1080);
+   glutInitWindowPosition(50, 50);
+   glutCreateWindow("Project");
+   glutDisplayFunc(display);
+
+   glutKeyboardFunc(handleKeypress);
+   glutMouseFunc(handleMouse);
+   glutTimerFunc(100, update, 0);
+   glutTimerFunc(100, update1, 0);
+   glutTimerFunc(100, update2, 0);
+   glutTimerFunc(100, update3, 0);
+   glutTimerFunc(100, update4, 0);
+   glutTimerFunc(100, update5, 0);
+   glutMainLoop();
+   return 0;
+}
+

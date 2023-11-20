@@ -1,0 +1,15 @@
+Use the sequence given below as a format guideline to write your project report-
+
+	Front Page
+	Group Member Information
+	Table of contents
+	Introduction
+	Proposal
+	Schematic Diagram
+	List of objects
+	Functions to represent the objects
+	Interactive functions
+	Task Assignment and codes of functions.
+	Conclusion
+
+Note - You can add more sections as per your convenience 

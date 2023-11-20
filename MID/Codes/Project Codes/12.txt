@@ -1,0 +1,203 @@
+/*
+Name: Mahir Faisal
+ID: 16-32724-3
+Group No: 12
+Project Description:
+My project name is a simple Whac-A-Mole game implemented in opengl glut library.
+The project goal was to make a simple game where the player have to click on moles which is represented by a simple character.
+If the player miss clicked life will be deducted if the player spends all of his/her 3 life the game is over, if the player
+manages to click on the mole he/she earns point.
+*/
+#include<iostream>
+#include<windows.h>
+#include<GL/glut.h>
+#include<math.h>
+#include<sstream>
+using namespace std;
+
+static int score = 0;
+static int life = 3;
+static int currentHole;
+int molePosX;
+int molePosY;
+
+char* gameStatus = "";
+
+void display();
+
+void init();
+
+void reshape(int,int);
+
+void holes(double x,double y,double z);
+
+void moles(int);
+
+void mouse(int button, int state, int x, int y);
+
+void Text(float x,float y,float z,void *font,char *string);
+
+
+int main(int argc,char**argv){
+    glutInit(&argc,argv);
+    glutInitDisplayMode(GLUT_RGB);
+
+    glutInitWindowPosition(500,200);
+    glutInitWindowSize(500,500);
+
+    glutCreateWindow("Whac-A-Mole");
+    glutTimerFunc(0,moles,1);
+    glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
+    glutMouseFunc(mouse);
+    init();
+    glutMainLoop();
+
+}
+
+void display(){
+    glClear(GL_COLOR_BUFFER_BIT);
+
+//Reset matrix
+    glLoadIdentity();
+
+//Grid
+    glPointSize(10.0);
+    glBegin(GL_LINES);
+    glVertex2f(-10, 0);
+    glVertex2f(10, 0);
+    glVertex2f(0, 10);
+    glVertex2f(0, -10);
+    glEnd();
+//Score Board
+    glBegin(GL_QUADS);
+    glVertex2f(-3,1);
+    glVertex2f(3,1);
+    glVertex2f(3,-1);
+    glVertex2f(-3,-1);
+    glEnd();
+
+//Holes
+    holes(-5,5,0);
+    holes(5,5,0);
+    holes(-5,-5,0);
+    holes(5,-5,0);
+    
+    glColor3f(1,0,0);
+
+    Text(-2.25,0,0,GLUT_BITMAP_TIMES_ROMAN_24,gameStatus);
+    glColor3f(0,1,0);
+
+////Moles
+////Position
+    glTranslatef(molePosX,molePosY,0);
+
+    glColor3f(0,0,1);
+//Head
+    glutSolidSphere(2.0,50.0,40);
+//EyeL
+    glTranslatef(-0.6,0.5,0);
+    glutSolidSphere(0.2,50.0,40);
+//EyeR
+    glTranslatef(1.5,0,0);
+    glutSolidSphere(0.2,50.0,40);
+//Nose
+    glTranslatef(-0.5,-1.5,0);
+    glutSolidSphere(0.4,50.0,40);
+
+    glPopMatrix();
+
+    glutPostRedisplay();
+
+    glFlush();
+}
+
+void mouse(int button, int state, int x, int y){
+    int currentClick;
+    if (button == GLUT_LEFT_BUTTON){
+        if(state == GLUT_DOWN){
+            if(x>0&&x<250&&y>0&&y<250){
+                currentClick = 1;
+            }else if(x>251&&x<500&&y>0&&y<250){
+                currentClick = 2;
+            }else if(x>0&&x<255&&y>251&&y<500){
+                currentClick = 3;
+            }else if(x>251&&x<500&&y>251&&y<500){
+                currentClick = 4;
+            }
+            if(life<=0){
+                cout<< "Game Over"<< endl;
+                gameStatus = "Game Over";
+            }
+
+            if(currentClick==currentHole){
+                score+=100;
+                cout<<score<<endl;
+            }else{
+                life--;
+                cout<<"Missed"<<endl;
+            }
+        }
+    }
+
+}
+
+void holes(double x,double y,double z){
+    glPushMatrix();
+    glColor3f(0,1,0);
+    glTranslatef(x,y,z);
+    glutSolidSphere(4.0,50.0,10);
+    glPopMatrix();
+}
+
+void moles(int){
+
+    glPushMatrix();
+    glColor3f(1,0,0);
+
+    int x = (rand()%4)+1;
+    currentHole = x;
+
+    switch(x){
+        case 1:
+            molePosX=-5;
+            molePosY=5;
+            break;
+        case 2:
+            molePosX=5;
+            molePosY=5;
+            break;
+        case 3:
+            molePosX=-5;
+            molePosY=-5;
+            break;
+        case 4:
+            molePosX=5;
+            molePosY=-5;
+            break;
+    }
+
+    glutTimerFunc(1000,moles,1);
+}
+
+void Text(float x,float y,float z,void *font,char *string) {
+
+  char *c;
+  glRasterPos3f(x, y,z);
+  for (c=string; *c != '\0'; c++) {
+    glutBitmapCharacter(font, *c);
+  }
+}
+
+void init(){
+    glClearColor(1.39,0.69,0.19,1);
+};
+
+void reshape(int w, int h){
+    glViewport(0,0,w,h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-10,10,-10,10);
+    glMatrixMode(GL_MODELVIEW);
+}
+
