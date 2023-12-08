@@ -165,29 +165,6 @@ void wave2() {
     glPopMatrix();
 }
 
-float wavemove = 0;
-
-void waveTranslate() {
-    glPushMatrix();
-    glTranslatef(0, wavemove, 0);
-    wave();
-    wave1();
-    wave2();
-    glPopMatrix();
-}
-
-float waveIncrement = 0.01; // Define the increment value
-void waveupdate(int value) {
-    // Check the direction of movement and toggle it when the condition is met
-    if (wavemove <= -0.2 || wavemove >= 0.2) {
-        waveIncrement = -waveIncrement; // Change direction
-    }
-
-    wavemove += waveIncrement; // Increment or decrement based on the direction
-    glutPostRedisplay();
-    glutTimerFunc(150, waveupdate, 0);
-}
-
 void watertaxi() {
 
     //inner side
@@ -258,6 +235,268 @@ void watertaxi() {
 
 }
 
+void land() {
+    quad(140, 198, 63, 0, 6.47, 3.85052, 7.20632, 1.77069, 8.71743, 0, 8.71743);
+    quad(140, 198, 63, 21.33779, 6.73928, 17.24857, 7.54775, 19.00612, 8.74288, 21.31436, 8.74288);
+}
+
+float carmove = 0;
+
+
+
+void car1() {
+
+    glPushMatrix();
+    glTranslatef(carmove, -0.2, 0);
+    //body
+    glBegin(GL_POLYGON);            // These vertices form a closed polygon
+    glColor3ub(0, 89, 186); // Yellow
+    glVertex2f(9.03829, 8.58235);
+    glVertex2f(8.95, 8.8);
+    glVertex2f(8.94442, 8.97557);
+    glVertex2f(9.26679, 9.05882);
+    glVertex2f(9.76628, 9.09778);
+    glVertex2f(9.75742, 8.53098);
+    glEnd();
+
+    glBegin(GL_POLYGON);            // These vertices form a closed polygon
+    glColor3ub(0, 89, 186); // Yellow
+    glVertex2f(9.75742, 8.53098);
+    glVertex2f(9.76628, 9.09778);
+    glVertex2f(10.21618, 9.43786);
+    glVertex2f(11.20277, 9.43786);
+    glVertex2f(11.80999, 9.04595);
+    glVertex2f(11.79702, 8.69327);
+    glVertex2f(11.71663, 8.60769);
+    glVertex2f(11.03719, 8.53248);
+    glEnd();
+
+    //window
+    quad(135, 206, 250, 9.86083, 9.09817, 10.24829, 9.39654, 10.70205, 9.38825, 10.67512, 9.10024);
+    quad(135, 206, 250, 10.74142, 9.10646, 10.74971, 9.39446, 11.15582, 9.40068, 11.48588, 9.14506);
+
+    //wheel1
+    circle(0.22360679775, 9.35814, 8.56342, 50, 50, 50);
+    circle(0.12360679775, 9.35814, 8.56342, 150, 150, 150);
+
+    //wheel2
+    circle(0.22360679775, 11.31459, 8.56342, 50, 50, 50);
+    circle(0.12360679775, 11.31459, 8.56342, 150, 150, 150);
+
+    //bumper
+    quad(112, 128, 144, 8.90596, 8.73523, 8.90596, 8.80354, 9.05624, 8.80081, 9.0535, 8.7325);
+    quad(112, 128, 144, 11.60954, 8.73377, 11.60856, 8.79962, 11.86787, 8.80081, 11.86241, 8.72704);
+
+    glPopMatrix();
+}
+
+void car1update(int value) {
+    carmove -= 0.01;
+    if (carmove < -20) {
+        carmove = 15;
+    }
+    glutPostRedisplay();
+    glutTimerFunc(5, car1update, 0);
+}
+
+void bridge() {
+    quad(211, 211, 211, 3, 7.8, 2.42487, 8.14993, 4.10807, 10.56884, 4.11434, 9.91399);
+    quad(211, 211, 211, 4.10807, 10.56884, 4.11434, 9.91399, 6.8, 7.6, 6.5853, 8.6698);
+    quad(211, 211, 211, 6.8, 7.6, 6.5853, 8.6698, 10.33136, 11.1882, 10.29139, 10.73854);
+    quad(211, 211, 211, 10.33136, 11.1882, 10.29139, 10.73854, 14.06479, 7.44043, 14.13994, 8.69514);
+    quad(211, 211, 211, 14.06479, 7.44043, 14.13994, 8.69514, 16.57562, 10.56147, 16.6262, 9.8211);
+    quad(211, 211, 211, 16.57562, 10.56147, 16.6262, 9.8211, 17.66542, 7.81826, 18.3807, 8.26837);
+    car1();
+
+    quad(132, 132, 132, 18.12696, 8.03385, 17.89094, 8.48198, 2.87956, 8.48198, 2.63322, 8.03385);
+
+    quad(132, 132, 132, 6.22474, 7.3, 6.80971, 7.3, 6.81321, 7.77361, 6.22474, 7.64751);
+    quad(132, 132, 132, 14.05998, 7.309, 14.64194, 7.309, 14.64194, 7.72607, 14.06322, 7.70021);
+
+    quad(247, 247, 247, 2.5105, 7.794, 1.77585, 8.27196, 3.71427, 10.70605, 3.78508, 10.17497);
+    quad(247, 247, 247, 3.71427, 10.70605, 3.78508, 10.17497, 6.43159, 7.41339, 6.44929, 8.58175);
+    quad(247, 247, 247, 6.43159, 7.41339, 6.44929, 8.58175, 10.33311, 11.34995, 10.35043, 10.90912);
+    quad(247, 247, 247, 10.33311, 11.34995, 10.35043, 10.90912, 14.3437, 7.44354, 14.31084, 8.57718);
+    quad(247, 247, 247, 14.3437, 7.44354, 14.31084, 8.57718, 17.06238, 10.7129, 17, 10.2);
+    quad(247, 247, 247, 17.06238, 10.7129, 17, 10.2, 18.25133, 7.8003, 18.99551, 8.27387);
+
+}
+
+void bridgeshadow() {
+    quad(82, 133, 145, 19.23567, 7.14246, 18.4, 7.3, 3.71048, 7.30619, 3.52152, 7.14188);
+}
+
+float wavemove = 0;
+float wavemove1 = 0.1;
+
+float pos = 0;
+float moveboat = 0;
+
+void waveTranslate() {
+    glPushMatrix();
+    glTranslatef(0, wavemove1, 0);
+    wave1();
+    wave2();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0, wavemove, 0);
+    wave();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(moveboat, wavemove, 0);
+    watertaxi(); //WATER TAXI <------------------------------------------------------------------- OVER HERE!!!
+    glPopMatrix();
+
+
+}
+
+bool isMoving = false;
+
+void moveupdate1(int value) {
+    if (moveboat >= pos) {
+        moveboat -= 0.07;
+        glutPostRedisplay();
+        glutTimerFunc(50, moveupdate1, 0);
+    }
+    else {
+        isMoving = false;
+    }
+}
+
+void moveupdate2(int value) {
+    if (moveboat <= pos) {
+        moveboat += 0.07;
+        glutPostRedisplay();
+        glutTimerFunc(50, moveupdate2, 0);
+    }
+    else {
+        isMoving = false;
+    }
+}
+
+void handleKeypress(unsigned char key, int x, int y) {
+    switch (key) {
+    case 'a':
+        if (!isMoving) {
+            pos -= 1.0f;
+            glutTimerFunc(0, moveupdate1, 0);
+            isMoving = true;
+        }
+        break;
+    case 'd':
+        if (!isMoving) {
+            pos += 1.0f;
+            glutTimerFunc(0, moveupdate2, 0);
+            isMoving = true;
+        }
+        break;
+    }
+}
+
+float waveIncrement = 0.01; // Define the increment value
+float waveIncrement1 = 0.01; // Define the increment value
+void waveupdate(int value) {
+    // Check the direction of movement and toggle it when the condition is met
+    if (wavemove <= -0.15 || wavemove >= 0.15) {
+        waveIncrement = -waveIncrement; // Change direction
+    }
+    if (wavemove1 <= -0.15 || wavemove1 >= 0.15) {
+        waveIncrement1 = -waveIncrement1; // Change direction
+    }
+
+    wavemove += waveIncrement; // Increment or decrement based on the direction
+    wavemove1 += waveIncrement1; // Increment or decrement based on the direction
+    glutPostRedisplay();
+    glutTimerFunc(80, waveupdate, 0);
+}
+
+float breeze = 0;
+
+void leaf() {
+    glPushMatrix();
+    glTranslatef(breeze, 0, 0);
+    triangle(57, 181, 74, 18.34513, 10.17111, 19.29811, 10.16576, 18.82698, 9.3493);
+    triangle(57, 181, 74, 18.97421, 10.07207, 19.91916, 10.07474, 19.44802, 9.25293);
+    triangle(57, 181, 74, 18.65426, 9.77189, 19.60626, 9.77467, 19.12191, 8.95351);
+    triangle(0, 104, 55, 19.41141, 8.84216, 19.89019, 9.68003, 18.92427, 9.6689);
+    triangle(0, 104, 55, 18.16156, 9.73014, 19.12191, 9.72735, 18.64313, 8.91454);
+    triangle(0, 146, 69, 17.9862, 9.67168, 18.46776, 8.84216, 18.95371, 9.67309);
+    triangle(0, 146, 69, 18.15873, 9.95785, 18.64086, 9.12999, 19.11594, 9.95785);
+    triangle(0, 146, 69, 19.89891, 8.83756, 19.41894, 9.67041, 20.37618, 9.67121);
+    triangle(0, 146, 69, 19.15393, 9.88976, 20.12121, 9.89179, 19.63555, 9.06414);
+    glPopMatrix();
+}
+
+float breezeIncrement = 0.01;
+void breezeupdate(int value) {
+    if (breeze <= -0.01 || breeze >= 0.01) {
+        breezeIncrement = -breezeIncrement;
+    }
+
+    breeze += breezeIncrement;
+    glutPostRedisplay();
+    glutTimerFunc(170, breezeupdate, 0);
+}
+
+
+
+void tree() {
+    leaf();
+
+    quad(117, 76, 36, 19.04714, 8.53238, 19.25545, 8.52643, 19.25435, 9.14741, 19.05155, 9.15622);
+    quad(117, 76, 36, 18.92643, 7.94738, 19.15377, 9.14756, 19.19607, 9.16077, 19.22515, 7.95003);
+    triangle(117, 76, 36, 19.21536, 8.97311, 19.80087, 9.45137, 19.19607, 9.16077);
+    quad(140, 98, 57, 19.22515, 7.95003, 19.42277, 7.94447, 19.25545, 8.52643, 19.19607, 9.16077);
+    triangle(140, 98, 57, 19.03964, 8.35912, 19.15377, 9.14756, 19.06874, 8.99927);
+    triangle(140, 98, 57, 19.06874, 8.99927, 19.15377, 9.14756, 18.50618, 9.44786);
+}
+
+void tree2() {
+    glPushMatrix();
+    glTranslatef(1.5, .5, 0);
+
+    tree();
+    glPopMatrix();
+}
+
+void tree3() {
+    glPushMatrix();
+    glTranslatef(-17.5, -0.5, 0);
+
+    tree();
+    glPopMatrix();
+}
+
+void tree4() {
+    glPushMatrix();
+    glTranslatef(-18.5, 0.5, 0);
+
+    tree();
+    glPopMatrix();
+}
+
+void tree5() {
+    glPushMatrix();
+    glTranslatef(0.7, 2.5, 0);
+    glScalef(0.7, 0.7, 0);
+
+    tree();
+    glPopMatrix();
+}
+
+void tree6() {
+    glPushMatrix();
+    glTranslatef(-7, 2.4, 0);
+    glScalef(0.7, 0.7, 0);
+
+    tree();
+    glPopMatrix();
+}
+
+
+
 void background() {
     //water
     water();
@@ -276,7 +515,16 @@ void display1() {
     glClear(GL_COLOR_BUFFER_BIT);   // Clear the color buffer with current clearing color
 
     background();
-    watertaxi();
+    tree5();
+    tree6();
+    tree2();
+    tree4();
+
+    bridgeshadow();
+    bridge();
+    land();
+    tree();
+    tree3();
 
 
 
@@ -296,7 +544,12 @@ int main(int argc, char** argv) {
     glutDisplayFunc(display1);       // Register callback handler for window re-paint event
     glutTimerFunc(0, cloudupdate, 0);
     glutTimerFunc(0, waveupdate, 0);
+    glutTimerFunc(0, moveupdate1, 0);
+    glutTimerFunc(0, moveupdate2, 0);
+    glutTimerFunc(0, breezeupdate, 0);
+    glutTimerFunc(0, car1update, 0);
     initGL();                       // Our own OpenGL initialization
+    glutKeyboardFunc(handleKeypress);
     glutFullScreen();                // Enter full screen mode
     glutMainLoop();                 // Enter the event-processing loop
     return 0;
