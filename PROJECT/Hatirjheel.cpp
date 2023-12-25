@@ -755,12 +755,65 @@ void wind() {
 }
 
 void windupdate(int value) {
-    windmove -= 0.01;
+    windmove -= 0.05;
     if (windmove < -40) {
         windmove = 30;
     }
     glutPostRedisplay();
     glutTimerFunc(1, windupdate, 0);
+}
+
+float rainmove = 0;
+float rainmove1 = 0;
+void rain1() {
+    glPushMatrix();
+    glTranslatef(0, rainmove, 0);
+    line(255, 255, 255, 1.98253, 1.01455, 2, 2); //QR
+    line(255, 255, 255, 8, 4, 8.00509, 4.99962); // OP
+    line(255, 255, 255, 14, 4, 13.95382, 5.02719); // IJ
+    line(255, 255, 255, 18, 2, 17.95279, 1.01455); // ST
+    line(255, 255, 255, 20, 6, 19.99027, 5.02958); // CD
+    line(255, 255, 255, 18, 10, 17.97637, 8.90184); // KL
+    line(255, 255, 255, 10.79164, 9.94351, 10.79164, 9.01466); // UV
+    line(255, 255, 255, 4.01578, 7.03846, 4, 6); // GH
+    line(255, 255, 255, 0.57427, 7.93599, 0.57427, 7.00714); // AB
+    line(255, 255, 255, 2, 12, 2.0045, 11.03142); // MN
+    line(255, 255, 255, 8, 14, 7.97916, 12.92439); // CD
+    line(255, 255, 255, 14.01298, 14.81735, 13.9834, 13.54551); // EF
+    line(255, 255, 255, 3.9862, 14.93566, 4, 16); // BA
+    line(255, 255, 255, 19.03146, 14.97728, 19.03146, 15.99603); // WZ
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0, rainmove1, 0);
+    line(255, 255, 255, 6.98253, 6.01455, 7, 7); // QR
+    line(255, 255, 255, 13, 9, 13.00509, 9.99962); // OP
+    line(255, 255, 255, 19, 9, 18.95382, 10.02719); // IJ
+    line(255, 255, 255, 23, 7, 22.95279, 6.01455); // ST
+    line(255, 255, 255, 25, 11, 24.99027, 10.02958); // CD
+    line(255, 255, 255, 23, 15, 22.97637, 13.90184); // KL
+    line(255, 255, 255, 15.79164, 14.94351, 15.79164, 14.01466); // UV
+    line(255, 255, 255, 9.01578, 12.03846, 9, 11); // GH
+    line(255, 255, 255, 5.57427, 12.93599, 5.57427, 12.00714); // AB
+    line(255, 255, 255, 7, 17, 7.0045, 16.03142); // MN
+    line(255, 255, 255, 13, 19, 12.97916, 17.92439); // CD
+    line(255, 255, 255, 19.01298, 19.81735, 18.9834, 18.54551); // EF
+    line(255, 255, 255, 8.9862, 19.93566, 9, 21); // BA
+    line(255, 255, 255, 24.03146, 19.97728, 24.03146, 20.99603); // WZ
+    glPopMatrix();
+}
+
+void rainupdate(int value) {
+    rainmove -= 0.01;
+    if (rainmove < -10) {
+        rainmove = 30;
+    }
+    rainmove1 -= 0.02;
+    if (rainmove1 < -10) {
+        rainmove1 = 30;
+    }
+    glutPostRedisplay();
+    glutTimerFunc(0.1, rainupdate, 0);
 }
 
 
@@ -833,6 +886,7 @@ void display1Rain() {
     tree3();
 
     wind();
+    rain1();
 
     glFlush();
 }
@@ -856,6 +910,7 @@ int main(int argc, char** argv) {
     glutTimerFunc(0, car1update, 0);
     glutTimerFunc(0, car2update, 0);
     glutTimerFunc(0, windupdate, 0);
+    glutTimerFunc(0, rainupdate, 0);
     initGL();                       // Our own OpenGL initialization
     glutKeyboardFunc(handleKeypress);
     glutFullScreen();                // Enter full screen mode
